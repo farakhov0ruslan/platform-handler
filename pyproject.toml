@@ -48,5 +48,5 @@ testpaths = ["tests"]
 [tool.coverage.run]
 omit = ["platform_handler/main.py", "platform_handler/serve.py"]
 
-[tool.uv.sources]
-notification-registry = { path = "../notification-registry" }
+#[tool.uv.sources]
+#notification-registry = { path = "../notification-registry" }
