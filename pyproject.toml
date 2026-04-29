@@ -1,0 +1,52 @@
+[[tool.uv.index]]
+name = "core"
+url = "https://gitlab.infra.salestrigger.io/api/v4/groups/2/-/packages/pypi/simple"
+authenticate = "always"
+
+[project]
+name = "platform-handler"
+version = "0.0.1"
+requires-python = ">=3.12.4,<4.0"
+dependencies = [
+    "utils-library[full]>=0.0.120",
+    "notification-registry==0.0.1rc1+local.d015444",
+    "sqlmodel>=0.0.20",
+    "asyncpg>=0.29",
+    "alembic-postgresql-enum",
+    "dishka>=1.4",
+    "fire",
+    "prometheus-client",
+]
+
+[dependency-groups]
+dev = [
+    "pytest-cov>=7.1.0",
+    "pytest-mock>=3.15.1",
+]
+test = [
+    "pytest>=8",
+    "pytest-mock",
+    "pytest-cov",
+    "polyfactory>=2",
+    "freezegun",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["I", "F", "E", "W", "S", "B", "C4", "PIE", "T20", "SIM", "TID", "ERA"]
+ignore = ["B008", "E501", "S104", "S101"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+
+[tool.pytest.ini_options]
+addopts = "--cov=platform_handler --cov-report=term-missing"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+omit = ["platform_handler/main.py", "platform_handler/serve.py"]
+
+[tool.uv.sources]
+notification-registry = { path = "../notification-registry" }
